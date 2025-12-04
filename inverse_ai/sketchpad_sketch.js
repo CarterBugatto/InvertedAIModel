@@ -1,101 +1,158 @@
-var pallet;
+let canvas;
+let canvasW;
+let canvasH;
+
+let chatWindow;
+let chatLog;
+
+let drawArea;
+let showDraw = true;
+
+var palette;
 var paper;
-var buttonBGChange;
 var sliderSize;
-var checkType;
+var btnBGChange;
+let btnPrompt;
+let btnReset;
 
-// Saaim addition variables
-let drawArea;          // Drawing area
-let showDraw = false;  // Variable to activate second canvas
-let drawDimX = 720;
-let drawDimY = 400;
-let btnDraw;
+let promptArray = [
+  "Generate an image of a curious cat",
+  "Generate an image of a futuristic city of hope",
+  "Generate a portrait of an artist",
+  "Generate an image of a 1980's Diner",
+  "Generate an image of a lonely flower",
+  "Generate an image of happiness",
+  "Generate an image of what you see right now",
+  "Generate an image of the future",
+  "Generate an image of the cycle of life",
+  "Generate an image of something you have just seen"
+];
 
-let promptArray= [
-  
-]
+let messages = [];
 
-function setup(){
-    createCanvas(1020,400);
-    createDiv("Create. Whatever. Shit. You want.");
+function setup() {
+  // Collects both columns/sections
+  const chatColumn = select("#chat-column");
+  const canvasColumn = select("#canvas-column");
 
-    pallet = createColorPicker("black");
-    paper = createColorPicker("white");
-    sliderSize = createSlider(1, 50, 10, 1)
+  const window = canvasColumn.elt.getBoundingClientRect(); // Gets the size of the actual canvas: chat and canvas windows (without the border)
+  canvasW = window.width;
+  canvasH = window.height;
 
-    background(paper.color());
-    buttonBGChange = createButton("Change background color");
-    buttonBGChange.mousePressed(BGChange);
-    checkType = createCheckbox("Seamless brush")
-  
-  // Saaim drawing canvas setup
-  btnDraw = createButton("Click me");
-  btnDraw.position(width - 70, height + 10);
-  btnDraw.mousePressed(() => {
-    // Button to activate drawing area
-    if (!drawArea) {
-      drawArea = createGraphics(300, 400); // Drawing area size
-      drawArea.background(220);
-    }
-    showDraw = true;
+  canvas = createCanvas(canvasW, canvasH);
+  canvas.parent(canvasColumn); // Attaches canvas to its column/section on the right
+
+  drawArea = createGraphics(canvasW, canvasH); // Drawing area
+  drawArea.background(220);
+
+  chatWindow = createDiv();
+  chatWindow.addClass("chat-window");
+  chatWindow.parent(chatColumn); // Attaches canvas to its column/section on the left
+
+  chatLog = createDiv();
+  chatLog.addClass("chat-log");
+  chatLog.parent(chatWindow); // Attaches canvas to its column/section on the left (child of chatWindow)
+
+  // Brush colour palette setup
+  palette = createColorPicker("#000000");
+  palette.parent(canvasColumn);
+  palette.style("position", "absolute");
+  palette.style("bottom", "65px");
+  palette.style("right", "215px");
+
+  // Canvas/drawing area colour setup
+  paper = createColorPicker("#ffffff");
+  paper.parent(canvasColumn);
+  paper.style("position", "absolute");
+  paper.style("bottom", "30px");
+  paper.style("right", "215px");
+
+  // Brush size slider setup
+  sliderSize = createSlider(1, 50, 10, 1);
+  sliderSize.parent(canvasColumn);
+  sliderSize.style("position", "absolute");
+  sliderSize.style("bottom", "70px");
+  sliderSize.style("right", "50px");
+
+  // Background colour switch button setup
+  btnBGChange = createButton("Confirm background colour");
+  btnBGChange.parent(canvasColumn);
+  btnBGChange.style("position", "absolute");
+  btnBGChange.style("bottom", "32.5px");
+  btnBGChange.style("right", "30px");
+  btnBGChange.mousePressed(BGChange);
+
+  // New prompt button setup
+  btnPrompt = createButton("New prompt");
+  btnPrompt.parent(canvasColumn);
+  btnPrompt.style("position", "absolute");
+  btnPrompt.style("bottom", "30px");
+  btnPrompt.style("left", "30px");
+  btnPrompt.mousePressed(() => {
+    drawArea.background(220);
+    promptDisplay();
   });
-  
-  promptDisplay();
+
+  // Reset drawing button setup
+  btnReset = createButton("Reset");
+  btnReset.parent(canvasColumn);
+  btnReset.style("position", "absolute");
+  btnReset.style("bottom", "60px");
+  btnReset.style("left", "30px");
+  btnReset.mousePressed(() => {drawArea.background(220)});
+
+  promptDisplay(); // Initial prompt
 }
 
-function draw(){
-    if(mouseIsPressed === true){
-        if (checkType.checked()) {
-            stroke(pallet.color());
-            strokeWeight(sliderSize.value());
-            line(pmouseX,pmouseY,mouseX,mouseY);
-        }  else {
-            fill(pallet.color());
-            strokeWeight(0);
-            ellipse(mouseX,mouseY,sliderSize.value(),sliderSize.value());
-        }
-        
-    }
-  
-  // Saaim drawing canvas
-  // Makes the drawing area visible
+function draw() {
+  background("#171717"); // Border around drawing canvas colour
+
   if (showDraw && drawArea) {
-    if ( // Checks mouse position to see if it is on the canvas
-      mouseIsPressed && 
-      mouseX >= drawDimX && mouseX <= width &&
-      mouseY >= 0 && mouseY <= height) {
-      
-      // Draws lines when mouseIsPressed
-      drawArea.stroke(0);
-      drawArea.strokeWeight(3);
-      drawArea.line(pmouseX - drawDimX, pmouseY - 0, mouseX - drawDimX,  mouseY - 0); // Replace 0 with drawDimY if moving position of drawing area
+    const margin = 15; // Border around drawing canvas
+    const r = 24;      // Border around drawing canvas corner
+
+    if (mouseIsPressed && mouseX >= margin && mouseX <= width - margin && mouseY >= margin && mouseY <= height - margin) { // Only draw if inside drawing canvas
+      drawArea.stroke(palette.color());
+      drawArea.strokeWeight(sliderSize.value());
+      drawArea.line(pmouseX, pmouseY, mouseX, mouseY);
     }
-    // Draw the drawArea onto the main canvas on the right
-    image(drawArea, drawDimX, 0); // Replace 0 with drawDimY if moving position of drawing area
-  } 
-  
+
+    // **ChatGPT was used to help understand how to functionally have a canvas with rounded corners below**
+    push();
+    drawingContext.save(); // Saves current canvas
+    drawingContext.beginPath(); // Starts a new path
+    drawingContext.roundRect(margin, margin, width - margin * 2, height - margin * 2, r); // Creates a rounded rect
+    drawingContext.clip(); // Clips anything outside of the rounded rect above
+    image(drawArea, 0, 0); // Shows only the drawing inside the rounded rect
+    drawingContext.restore(); // Resets clipping region
+    pop();
+  }
 }
 
 function promptDisplay() {
+  let rand = int(random(0, promptArray.length));
+  let msg = promptArray[rand];
+
+  messages.push(msg);
+  addMessage(msg, "bot");
+}
+
+function addMessage(text, sender) {
+  let msg = createDiv(text);
   
-}
-function BGChange(){
-    background(paper.color());
+  msg.parent(chatLog);
+  msg.addClass("message");
+  
+  if (sender === "user") {
+    msg.addClass("user");
+  } else {
+    msg.addClass("bot");
+  }
+
+  const logElt = chatLog.elt;
+  logElt.scrollTop = logElt.scrollHeight;
 }
 
-function keyPressed(){
-    if (keyCode === 32) {
-        background(paper.color());
-    }
+function BGChange() {
+  drawArea.background(paper.color());
 }
-
-// function draw(){
-    //if(mouseIsPressed === true){
-        //fill(0,0,0);
-        //noStroke();
-        //ellipse(mouseX,mouseY,5,5);
-    //}
-    //else{
-        //background(200,200,200,8);
-    //}
-//}
