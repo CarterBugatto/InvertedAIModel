@@ -10,7 +10,6 @@ body {
   overflow: hidden;
 }
 
-
 #app-container { /* Container for chat window and canvas window */
   position: absolute;
   top: 1vh;
@@ -72,7 +71,7 @@ body {
   padding: 0.35rem 0.9rem 0.45rem 0.9rem;
   margin: 0;
   line-height: 1.3;
-  font-size: 1.2rem; /* Change this to change chat bubble size */
+  font-size: 3rem; /* Change this to change chat bubble size */
 }
 
 .message.bot { /* "Bots" messages */
@@ -93,4 +92,8 @@ body {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.value-indicator {
+  z-index: 2;
 }

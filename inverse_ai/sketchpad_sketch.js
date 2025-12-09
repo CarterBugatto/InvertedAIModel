@@ -30,8 +30,21 @@ let promptArray = [
 "an answer to the meaning of existence in a giant cube, inquisitive, isometric and translucent",
 "a robot and a human together, filled with tension, human not touching robot",
 "a human doing programmed actions, simplistic, in civilian clothes",
-"a robot doing human actions, simplistic, with exposed wires"
+"a robot doing human actions, simplistic, with exposed wires",
+"a hypothesis on how robots and humans would be a decade from now, nebulous and interpretitive",
+"a human contemplating, staring at a computer screen",
+"a robot attempting to follow a footpath left behind, natural vs urban",
+"a robot attempting to entertain a crowd, large stage",
+"a human recording a video of another human, secretive",
+"an unexpected break in an algorithm, repetitive objects"
 ];
+
+let introArray = [
+  "Welcome to our human-based console. As queries are being made by our servers, please do your best to generate an image for them. Thank you for your participation.",
+  "Welcome to our human-based console. All queries made are up to human interpretation and can vary from person to person. Thank you for your participation.",
+  "Welcome to our human-based console. Brush size can be adjusted using the slider for detailing if you so wish. Thank you for your participation.",
+  "Welcome to our human-based console. All entries are temporarily made and will not be collected once the project is over. Thank you for your participation."
+]
 
 let messages = [];
 let drawingAmount;
@@ -68,6 +81,8 @@ function setup() {
   palette.style("position", "absolute");
   palette.style("bottom", "65px");
   palette.style("right", "215px");
+  palette.style("height", "4rem");
+  palette.style("width", "4rem");
 
   // drawing area commented out due to vestigial use
   /*
@@ -83,8 +98,20 @@ function setup() {
   sliderSize = createSlider(1, 50, 10, 1);
   sliderSize.parent(canvasColumn);
   sliderSize.style("position", "absolute");
-  sliderSize.style("bottom", "70px");
-  sliderSize.style("right", "50px");
+  sliderSize.style("bottom", "2rem");
+  sliderSize.style("right", "4rem");
+  sliderSize.style("width", "15rem");
+  sliderSize.style("height", "1rem");
+
+  sliderValue = createDiv("Brush size: " + sliderSize.value());
+  sliderValue.addClass("value-indicator");
+  sliderValue.parent(canvasColumn);
+  sliderValue.style("position", "absolute");
+  sliderValue.style("font-size", "2rem");
+  sliderValue.style("text-align","center");
+  sliderValue.style("bottom"," 4rem");
+  sliderValue.style("right", "2rem");
+  sliderValue.style("width", "10rem");
 
   /*
   // Background colour switch button setup
@@ -100,8 +127,10 @@ function setup() {
   btnPrompt = createButton("New prompt");
   btnPrompt.parent(canvasColumn);
   btnPrompt.style("position", "absolute");
-  btnPrompt.style("bottom", "30px");
-  btnPrompt.style("left", "30px");
+  btnPrompt.style("bottom", "2rem");
+  btnPrompt.style("left", "2rem");
+  btnPrompt.style("font-size", "3rem");
+  btnPrompt.style("padding", "1rem");
   btnPrompt.mousePressed(() => {
     addMessage("", "user");
     drawArea.background(220);
@@ -112,8 +141,10 @@ function setup() {
   btnReset = createButton("Reset");
   btnReset.parent(canvasColumn);
   btnReset.style("position", "absolute");
-  btnReset.style("bottom", "60px");
-  btnReset.style("left", "30px");
+  btnReset.style("bottom", "8rem");
+  btnReset.style("left", "2rem");
+  btnReset.style("font-size", "3rem");
+  btnReset.style("padding", "1rem");
   //btnReset.mousePressed(() => {drawArea.background(220)});
   
   /*
@@ -156,9 +187,12 @@ function draw() {
 function promptDisplay() {
   let rand = int(random(0, promptArray.length));
   let msg = promptArray[rand];
+  let rand2 = int(random(0, introArray.length));
+  let intro = introArray[rand2];
 
+  addMessage(intro, "bot");
   messages.push(msg);
-  addMessage(msg, "bot");
+  addMessage('<p><b>New query: Generate ' + msg + '</b></p>', "bot");
 }
 
 function addMessage(text, sender) {
@@ -176,7 +210,7 @@ function addMessage(text, sender) {
     }
   }
   else {
-    msg = createDiv('Generate '+text);
+    msg = createDiv(text);
   }
   
   msg.parent(chatLog);
