@@ -103,15 +103,19 @@ function setup() {
   sliderSize.style("width", "15rem");
   sliderSize.style("height", "1rem");
 
-  sliderValue = createDiv("Brush size: " + sliderSize.value());
+  sliderValue = createDiv("Brush size");
   sliderValue.addClass("value-indicator");
   sliderValue.parent(canvasColumn);
   sliderValue.style("position", "absolute");
-  sliderValue.style("font-size", "2rem");
+  sliderValue.style("font-size", "1.5rem");
   sliderValue.style("text-align","center");
   sliderValue.style("bottom"," 4rem");
   sliderValue.style("right", "2rem");
   sliderValue.style("width", "10rem");
+
+  sliderSize.mousePressed(() => {
+    sliderValue.innerHTML = "<p>Brush size: " + sliderSize.value() + "</p>";
+  })
 
   /*
   // Background colour switch button setup
@@ -145,7 +149,7 @@ function setup() {
   btnReset.style("left", "2rem");
   btnReset.style("font-size", "3rem");
   btnReset.style("padding", "1rem");
-  //btnReset.mousePressed(() => {drawArea.background(220)});
+  btnReset.mousePressed(() => {drawArea.background(220)});
   
   /*
   btnSave = createButton("Save");
