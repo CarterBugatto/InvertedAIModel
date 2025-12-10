@@ -79,10 +79,17 @@ function setup() {
   palette = createColorPicker("#000000");
   palette.parent(canvasColumn);
   palette.style("position", "absolute");
+<<<<<<< Updated upstream
   palette.style("bottom", "65px");
   palette.style("right", "215px");
   palette.style("height", "4rem");
   palette.style("width", "4rem");
+=======
+  palette.style("bottom", "70px");
+  palette.style("right", "260px");
+  palette.style("height", "7rem");
+  palette.style("width", "7rem");
+>>>>>>> Stashed changes
 
   // drawing area commented out due to vestigial use
   /*
@@ -100,8 +107,13 @@ function setup() {
   sliderSize.style("position", "absolute");
   sliderSize.style("bottom", "2rem");
   sliderSize.style("right", "4rem");
+<<<<<<< Updated upstream
   sliderSize.style("width", "15rem");
   sliderSize.style("height", "1rem");
+=======
+  sliderSize.style("width", "20rem");
+  sliderSize.style("height", "2rem");
+>>>>>>> Stashed changes
 
   sliderValue = createDiv("Brush size");
   sliderValue.addClass("value-indicator");
@@ -109,8 +121,13 @@ function setup() {
   sliderValue.style("position", "absolute");
   sliderValue.style("font-size", "1.5rem");
   sliderValue.style("text-align","center");
+<<<<<<< Updated upstream
   sliderValue.style("bottom"," 4rem");
   sliderValue.style("right", "2rem");
+=======
+  sliderValue.style("bottom"," 5rem");
+  sliderValue.style("right", "5rem");
+>>>>>>> Stashed changes
   sliderValue.style("width", "10rem");
 
   sliderSize.mousePressed(() => {
@@ -130,6 +147,7 @@ function setup() {
   // New prompt button setup
   btnPrompt = createButton("New prompt");
   btnPrompt.parent(canvasColumn);
+  btnPrompt.style("user-select", "none")
   btnPrompt.style("position", "absolute");
   btnPrompt.style("bottom", "2rem");
   btnPrompt.style("left", "2rem");
@@ -144,6 +162,7 @@ function setup() {
   // Reset drawing button setup
   btnReset = createButton("Reset");
   btnReset.parent(canvasColumn);
+  btnPrompt.style("user-select", "none")
   btnReset.style("position", "absolute");
   btnReset.style("bottom", "8rem");
   btnReset.style("left", "2rem");

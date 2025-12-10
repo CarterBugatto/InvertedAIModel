@@ -65,7 +65,7 @@ body {
   border-radius: 1rem;
   max-width: 100%;
   
-  background-color: #1f2937; /* Chat bubble colour */
+  background-color: #414852; /* Chat bubble colour */
   color: #e5e7eb; /* Chat bubble text colour */
 
   padding: 0.35rem 0.9rem 0.45rem 0.9rem;
@@ -75,11 +75,16 @@ body {
 }
 
 .message.bot { /* "Bots" messages */
+  user-select: none;
   align-self: flex-start;
 }
 
 .message.user { /* "Users" messages */
+<<<<<<< Updated upstream
   height: 50%; /* Change this to change size of user output! */
+=======
+  height: 40%; /* Change this to change size of user output! */
+>>>>>>> Stashed changes
   align-self: flex-end;
 }
 
