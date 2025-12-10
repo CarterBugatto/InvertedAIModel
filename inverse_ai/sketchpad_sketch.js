@@ -79,23 +79,10 @@ function setup() {
   palette = createColorPicker("#000000");
   palette.parent(canvasColumn);
   palette.style("position", "absolute");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  palette.style("bottom", "65px");
-  palette.style("right", "215px");
-  palette.style("height", "4rem");
-  palette.style("width", "4rem");
-=======
-=======
->>>>>>> Stashed changes
   palette.style("bottom", "70px");
-  palette.style("right", "260px");
-  palette.style("height", "7rem");
-  palette.style("width", "7rem");
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+  palette.style("right", "12rem"); // palette.style("right", "260px");
+  palette.style("height", "2rem"); // palette.style("height", "7rem");
+  palette.style("width", "2rem"); // palette.style("width", "7rem");
 
   // drawing area commented out due to vestigial use
   /*
@@ -113,38 +100,18 @@ function setup() {
   sliderSize.style("position", "absolute");
   sliderSize.style("bottom", "2rem");
   sliderSize.style("right", "4rem");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  sliderSize.style("width", "15rem");
-  sliderSize.style("height", "1rem");
-=======
-  sliderSize.style("width", "20rem");
+  sliderSize.style("width", "10rem"); // sliderSize.style("width", "20rem");
   sliderSize.style("height", "2rem");
->>>>>>> Stashed changes
-=======
-  sliderSize.style("width", "20rem");
-  sliderSize.style("height", "2rem");
->>>>>>> Stashed changes
 
   sliderValue = createDiv("Brush size");
   sliderValue.addClass("value-indicator");
   sliderValue.parent(canvasColumn);
   sliderValue.style("position", "absolute");
-  sliderValue.style("font-size", "1.5rem");
+  sliderValue.style("font-size", "1rem"); //sliderValue.style("font-size", "1.5rem");
   sliderValue.style("text-align","center");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  sliderValue.style("bottom"," 4rem");
-  sliderValue.style("right", "2rem");
-=======
   sliderValue.style("bottom"," 5rem");
   sliderValue.style("right", "5rem");
->>>>>>> Stashed changes
-=======
-  sliderValue.style("bottom"," 5rem");
-  sliderValue.style("right", "5rem");
->>>>>>> Stashed changes
-  sliderValue.style("width", "10rem");
+  sliderValue.style("width", "5rem"); //sliderValue.style("width", "10rem");
 
   sliderSize.mousePressed(() => {
     sliderValue.innerHTML = "<p>Brush size: " + sliderSize.value() + "</p>";
@@ -167,8 +134,8 @@ function setup() {
   btnPrompt.style("position", "absolute");
   btnPrompt.style("bottom", "2rem");
   btnPrompt.style("left", "2rem");
-  btnPrompt.style("font-size", "3rem");
-  btnPrompt.style("padding", "1rem");
+  btnPrompt.style("font-size", "1rem"); //btnPrompt.style("font-size", "3rem");
+  // btnPrompt.style("padding", "1rem");
   btnPrompt.mousePressed(() => {
     addMessage("", "user");
     drawArea.background(220);
@@ -180,10 +147,10 @@ function setup() {
   btnReset.parent(canvasColumn);
   btnPrompt.style("user-select", "none")
   btnReset.style("position", "absolute");
-  btnReset.style("bottom", "8rem");
+  btnReset.style("bottom", "4rem"); // btnReset.style("bottom", "8rem");
   btnReset.style("left", "2rem");
-  btnReset.style("font-size", "3rem");
-  btnReset.style("padding", "1rem");
+  btnReset.style("font-size", "1rem"); //btnReset.style("font-size", "3rem");
+ //  btnReset.style("padding", "1rem");
   btnReset.mousePressed(() => {drawArea.background(220)});
   
   /*

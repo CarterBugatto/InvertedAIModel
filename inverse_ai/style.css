@@ -71,7 +71,7 @@ body {
   padding: 0.35rem 0.9rem 0.45rem 0.9rem;
   margin: 0;
   line-height: 1.3;
-  font-size: 3rem; /* Change this to change chat bubble size */
+  font-size: 1rem; /* 3 rem for exhibitions */
 }
 
 .message.bot { /* "Bots" messages */
@@ -80,15 +80,7 @@ body {
 }
 
 .message.user { /* "Users" messages */
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-  height: 50%; /* Change this to change size of user output! */
-=======
   height: 40%; /* Change this to change size of user output! */
->>>>>>> Stashed changes
-=======
-  height: 40%; /* Change this to change size of user output! */
->>>>>>> Stashed changes
   align-self: flex-end;
 }
 
