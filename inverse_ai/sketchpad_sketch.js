@@ -80,15 +80,21 @@ function setup() {
   palette.parent(canvasColumn);
   palette.style("position", "absolute");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   palette.style("bottom", "65px");
   palette.style("right", "215px");
   palette.style("height", "4rem");
   palette.style("width", "4rem");
 =======
+=======
+>>>>>>> Stashed changes
   palette.style("bottom", "70px");
   palette.style("right", "260px");
   palette.style("height", "7rem");
   palette.style("width", "7rem");
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   // drawing area commented out due to vestigial use
@@ -108,8 +114,13 @@ function setup() {
   sliderSize.style("bottom", "2rem");
   sliderSize.style("right", "4rem");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   sliderSize.style("width", "15rem");
   sliderSize.style("height", "1rem");
+=======
+  sliderSize.style("width", "20rem");
+  sliderSize.style("height", "2rem");
+>>>>>>> Stashed changes
 =======
   sliderSize.style("width", "20rem");
   sliderSize.style("height", "2rem");
@@ -122,8 +133,13 @@ function setup() {
   sliderValue.style("font-size", "1.5rem");
   sliderValue.style("text-align","center");
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   sliderValue.style("bottom"," 4rem");
   sliderValue.style("right", "2rem");
+=======
+  sliderValue.style("bottom"," 5rem");
+  sliderValue.style("right", "5rem");
+>>>>>>> Stashed changes
 =======
   sliderValue.style("bottom"," 5rem");
   sliderValue.style("right", "5rem");

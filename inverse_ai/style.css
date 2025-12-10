@@ -81,7 +81,11 @@ body {
 
 .message.user { /* "Users" messages */
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   height: 50%; /* Change this to change size of user output! */
+=======
+  height: 40%; /* Change this to change size of user output! */
+>>>>>>> Stashed changes
 =======
   height: 40%; /* Change this to change size of user output! */
 >>>>>>> Stashed changes
